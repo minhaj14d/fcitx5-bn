@@ -1,6 +1,46 @@
+Fcitx5 BN — Bengali desktop input
+==================================
+
+**This is a standalone fork of [Fcitx 5](https://github.com/fcitx/fcitx5) with built-in Bangla input methods.** It is not the upstream Fcitx5 project. Language-specific engines belong in separate repos or distributions like this one — do not open pull requests against `fcitx/fcitx5` for Bangla support.
+
+Upstream Fcitx5 provides the input method framework and keyboard engine. **This fork adds the `bangla` addon** with two Bengali IMEs:
+
+| IME | Description |
+|-----|-------------|
+| **Avro** | Phonetic transliteration — type Roman letters, see Bengali preedit, commit with Space/Enter |
+| **Probhat** | Fixed QWERTY layout — each key commits Bengali immediately |
+
+### Build
+
+```bash
+cmake -B build -DENABLE_BANGLA=On
+cmake --build build
+sudo cmake --install build
+```
+
+`ENABLE_BANGLA` is on by default.
+
+### Usage
+
+1. Open **Fcitx 5 Configuration** and add **Avro** or **Probhat** under Input Method.
+2. For locale `bn_IN`, **Avro** is the default input method.
+3. Optional user dictionary: `$XDG_DATA_HOME/fcitx5/bangla/user.dict.txt`  
+   Format: `roman<TAB>বাংলা` or `roman=বাংলা` per line (reloaded when you switch to Avro).
+
+### Bug reports
+
+- **Bangla addon (Avro, Probhat, dictionary):** [github.com/minhaj14d/fcitx5-bn/issues](https://github.com/minhaj14d/fcitx5-bn/issues)
+- **Core Fcitx5 / keyboard engine:** [github.com/fcitx/fcitx5/issues](https://github.com/fcitx/fcitx5/issues)
+
+Related: [fcitx5-android-bn](https://github.com/minhaj14d/fcitx5-android-bn) (Android port with the same Bangla addon).
+
+---
+
 Next generation of fcitx
 ==========================
 Fcitx 5 is a generic input method framework released under LGPL-2.1+.
+
+The sections below are inherited from upstream Fcitx5 documentation.
 
 # Resources
 
@@ -36,9 +76,11 @@ Looking for Mac or Android?
 [Mac](https://github.com/fcitx-contrib/fcitx5-macos/)
 [Android](https://github.com/fcitx5-android/fcitx5-android)
  
-The main package (this repository) only contains keyboard layout engine.
+The main package (upstream) only contains keyboard layout engine.
 
-Coressponding input method engines need to be installed to support other languages (e.g. Chinese/Japanese/Korean).
+**In this fork**, the `bangla` addon is built in by default (`ENABLE_BANGLA`), so Avro and Probhat do not require a separate package.
+
+Other languages still need their own input method engines (e.g. Chinese/Japanese/Korean).
 
 You may find the list of input method engines at [here](https://fcitx-im.org/wiki/Input_method_engines).
 
